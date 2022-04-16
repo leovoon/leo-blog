@@ -1,16 +1,5 @@
 <script context="module">
     export const prerender = true;
-
-    export const load = async ({ params, fetch }) => {
-      const slug = params.slug;
-      const res = await fetch(`/api/posts/${slug}`);
-      const post = await res.json();
-      return {
-        props: {
-          post,
-        },
-      };
-    };
   </script>
   
   <script>
