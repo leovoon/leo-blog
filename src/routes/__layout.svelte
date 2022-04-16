@@ -1,6 +1,7 @@
 <div class="wrapper">
     <slot />
   </div>
+  <footer>by leovoon</footer>
   
   <style>
     .wrapper {
