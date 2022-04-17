@@ -11,7 +11,7 @@
 
 <MetaTitle title="Home" />
 
-<h1><a href="/"> Leo's Code Snippets </a></h1>
+<h2><a href="/"> Leo's Code Snippets </a></h2>
 {#each posts as post}
 	<article>
 		<a style="text-decoration: none;" sveltekit:prefetch href={`/posts/${post.slug}`}>
@@ -21,9 +21,11 @@
 					<CategoryBadge {category} />
 				{/each}
 			</div>
-			<img src={post.image} alt={post.title.rendered} />
-			<p>{@html post.excerpt.rendered}</p>
-			<a href={`/posts/${post.slug}`}>Read More</a>
+      <div class="post">
+        <img src={post.image} alt={post.title.rendered} />
+        <p>{@html post.excerpt.rendered} <a href={`/posts/${post.slug}`}>Read More</a></p>
+        
+      </div>
 		</a>
 	</article>
 {/each}
@@ -47,4 +49,32 @@
 		gap: 1rem;
 		margin-bottom: 1rem;
 	}
+
+  .post {
+    display: flex;
+  }
+
+  @media (max-width: 1024px) {
+    .post {
+      flex-direction: column;
+    }
+
+    .post img {
+      width: 100%;
+      min-width: 100%;
+    }
+  }
+
+  .post img {
+    width: 50%;
+    margin-right: 1rem;
+  }
+
+  .post p {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: -.2rem;
+  }
+
 </style>
