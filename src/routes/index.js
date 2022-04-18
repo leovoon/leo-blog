@@ -1,5 +1,5 @@
-const url = 'https://public-api.wordpress.com/wp/v2/sites/lihhaur.wordpress.com/posts'
-
+// const url = 'https://public-api.wordpress.com/wp/v2/sites/lihhaur.wordpress.com/posts'
+const url = import.meta.env.VITE_WORDPRESS_API_BASE_PATH + '/posts'
 export const get = async () => {
   const res = await fetch(`${url}?_embed`);
   const posts = await res.json();
