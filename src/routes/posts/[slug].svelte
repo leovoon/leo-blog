@@ -1,3 +1,5 @@
+<script context="module">
+</script>
 
 <script>
 	import MetaTitle from '$lib/MetaTitle.svelte';
