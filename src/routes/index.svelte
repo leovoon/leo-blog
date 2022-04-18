@@ -21,12 +21,16 @@
 					<CategoryBadge {category} />
 				{/each}
 			</div>
-      <div class="post">
-        <img src={post.image} alt={post.title.rendered} />
-        <p>{@html post.excerpt.rendered} <a href={`/posts/${post.slug}`}>Read More</a></p>
-        
-      </div>
-		</a>
+			<div class="post">
+				<div class="img-wrapper">
+					<img src={post.image} alt={post.title.rendered} />
+				</div>
+				<div class="excerpt-wrapper">
+					{@html post.excerpt.rendered}
+					<a href={`/posts/${post.slug}`}>Read More</a>
+				</div>
+			</div></a
+		>
 	</article>
 {/each}
 
@@ -45,36 +49,43 @@
 
 	.categories {
 		display: flex;
-
 		gap: 1rem;
 		margin-bottom: 1rem;
 	}
 
-  .post {
-    display: flex;
-  }
+	.post {
+		display: flex;
+		align-items: flex-start;
+	}
 
-  @media (max-width: 1024px) {
-    .post {
-      flex-direction: column;
-    }
+	.post .img-wrapper {
+		width: 50%;
+		margin-right: 1rem;
+	}
 
-    .post img {
+	.post .excerpt-wrapper {
+		width: 50%;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: flex-end;
+		margin-top: -1em;
+	}
+
+	@media (max-width: 600px) {
+		.post {
+			flex-direction: column;
+		}
+
+    .post .img-wrapper {
       width: 100%;
-      min-width: 100%;
     }
-  }
 
-  .post img {
-    width: 50%;
-    margin-right: 1rem;
-  }
+    .post .excerpt-wrapper {
+      width: 100%;
+      margin-top: 0;
+    }
 
-  .post p {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    margin-bottom: -.2rem;
-  }
-
+	}
 </style>
