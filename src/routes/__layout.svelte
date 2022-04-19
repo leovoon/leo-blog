@@ -1,11 +1,21 @@
 <script>
 	import MetaTitle from '$lib/MetaTitle.svelte';
 	import '../app.css';
-	
+	import NProgress from 'nprogress';
+	import 'nprogress/nprogress.css';
+	import { navigating } from '$app/stores';
+
+	NProgress.configure({
+		minimum: 0.16
+	});
+
+	$: {
+		$navigating && NProgress.start();
+		!$navigating && NProgress.done();
+	}
 </script>
 
 <MetaTitle title="Leo's code snippets" />
-
 <div class="wrapper">
 	<slot />
 </div>
