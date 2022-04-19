@@ -10,7 +10,7 @@
 {:else}
 	<h2>{@html post.title.rendered}</h2>
 	<p><small>{new Date(post.date).toLocaleString('en-US', { hour12: true })}</small></p>
-	<p>by <b></b>{post.author}</b></p>
+	<p>by <b>{post.author}</b></p>
 	{#if post.image}
 		<img src={post.image} alt={post.title.rendered} />
 	{/if}
