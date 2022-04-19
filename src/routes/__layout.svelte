@@ -20,10 +20,13 @@
 	<slot />
 </div>
 <footer>
-	Built by leovoon.
-	<a href="/">Home</a>
-	|
-	<a href="/login">Login</a>
+	Built with <a href="https://kit.svelte.dev/">SvelteKit</a> by
+	<a href="https://github.com/leovoon">leovoon</a>.
+	<p>
+		<a href="/">Home</a>
+		|
+		<a href="/login">Login</a>
+	</p>
 </footer>
 
 <style>
