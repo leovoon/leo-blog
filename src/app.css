@@ -118,3 +118,8 @@ footer {
 	text-align: center;
 	margin: 2rem;
 }
+
+#nprogress .bar {
+	background: rgba(232, 146, 135, 0.9) !important;
+	height: 5px !important;
+}
