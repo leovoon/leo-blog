@@ -1,8 +1,8 @@
 <script>
 	import MetaTitle from '$lib/MetaTitle.svelte';
+	import 'nprogress/nprogress.css';
 	import '../app.css';
 	import NProgress from 'nprogress';
-	import 'nprogress/nprogress.css';
 	import { navigating } from '$app/stores';
 
 	NProgress.configure({
