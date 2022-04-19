@@ -28,8 +28,8 @@
 					{@html post.excerpt.rendered}
 					<a href={`/posts/${post.slug}`}>Read More</a>
 				</div>
-			</div></a
-		>
+			</div>
+      </a>
 	</article>
 {/each}
 
