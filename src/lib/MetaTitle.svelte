@@ -1,7 +1,7 @@
-<script> 
-    export let title;
+<script>
+	export let title;
 </script>
 
 <svelte:head>
-  <title>{title}</title>
+	<title>{title}</title>
 </svelte:head>
