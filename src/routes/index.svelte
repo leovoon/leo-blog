@@ -4,16 +4,17 @@
 <script>
 	import CategoryBadge from '$lib/CategoryBadge.svelte';
 	import MetaTitle from '$lib/MetaTitle.svelte';
-
+	import SearchPost from '$lib/SearchPost.svelte';
 	export let posts;
 </script>
 
 <MetaTitle title="Home" />
 
 <h2><a href="/"> Leo's Code Snippets </a></h2>
+<SearchPost />
 {#each posts as post}
 	<article>
-		<a style="text-decoration: none;" sveltekit:prefetch href={`/posts/${post.slug}`}>
+		<a style="text-decoration: none;" sveltekit:prefetch href={`/post/${post.slug}`}>
 			<h2>{@html post.title.rendered}</h2>
 			<div class="categories">
 				{#each post.categories as category}
@@ -26,10 +27,10 @@
 				</div>
 				<div class="excerpt-wrapper">
 					{@html post.excerpt.rendered}
-					<a href={`/posts/${post.slug}`}>Read More</a>
+					<a href={`/post/${post.slug}`}>Read More</a>
 				</div>
 			</div>
-      </a>
+		</a>
 	</article>
 {/each}
 
@@ -77,14 +78,13 @@
 			flex-direction: column;
 		}
 
-    .post .img-wrapper {
-      width: 100%;
-    }
+		.post .img-wrapper {
+			width: 100%;
+		}
 
-    .post .excerpt-wrapper {
-      width: 100%;
-      margin-top: 0;
-    }
-
+		.post .excerpt-wrapper {
+			width: 100%;
+			margin-top: 0;
+		}
 	}
 </style>
