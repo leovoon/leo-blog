@@ -1,38 +1,43 @@
-<script context="module">
-</script>
-
 <script>
 	import CategoryBadge from '$lib/CategoryBadge.svelte';
 	import MetaTitle from '$lib/MetaTitle.svelte';
 	import SearchPost from '$lib/SearchPost.svelte';
+	import { fade } from 'svelte/transition';
+
 	export let posts;
+	let searchText = '';
 </script>
 
 <MetaTitle title="Home" />
-
 <h2><a href="/"> Leo's Code Snippets </a></h2>
-<SearchPost />
-{#each posts as post}
-	<article>
-		<a style="text-decoration: none;" sveltekit:prefetch href={`/post/${post.slug}`}>
-			<h2>{@html post.title.rendered}</h2>
-			<div class="categories">
-				{#each post.categories as category}
-					<CategoryBadge {category} />
-				{/each}
-			</div>
-			<div class="post">
-				<div class="img-wrapper">
-					<img src={post.image} alt={post.title.rendered} />
-				</div>
-				<div class="excerpt-wrapper">
-					{@html post.excerpt.rendered}
-					<a href={`/post/${post.slug}`}>Read More</a>
-				</div>
-			</div>
-		</a>
-	</article>
-{/each}
+<SearchPost bind:value={searchText} />
+{#if posts.length > 0}
+	<main transition:fade>
+		{#each posts as post}
+			<article>
+				<a style="text-decoration: none;" sveltekit:prefetch href={`/post/${post.slug}`}>
+					<h2>{@html post.title.rendered}</h2>
+					<div class="categories">
+						{#each post.categories as category}
+							<CategoryBadge {category} />
+						{/each}
+					</div>
+					<div class="post">
+						<div class="img-wrapper">
+							<img src={post.image} alt={post.title.rendered} />
+						</div>
+						<div class="excerpt-wrapper">
+							{@html post.excerpt.rendered}
+							<a href={`/post/${post.slug}`}>Read More</a>
+						</div>
+					</div>
+				</a>
+			</article>
+		{/each}
+	</main>
+{:else if posts.length === 0}
+	<p class="search-loading">No snippet found..</p>
+{/if}
 
 <style>
 	article {
@@ -41,10 +46,15 @@
 		border-radius: 13px;
 		cursor: pointer;
 		transition: box-shadow 0.2s ease-in-out;
+		box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 	}
 
 	article:hover {
-		box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+		box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.3);
+	}
+
+	.search-loading {
+		color: rgba(0, 0, 0, 0.6);
 	}
 
 	.categories {

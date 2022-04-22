@@ -1,12 +1,16 @@
 <script>
 	let placeholder = 'Search snippet...';
+	export let value = '';
 </script>
 
-<input type="text" {placeholder} />
+<form action="/" method="get">
+	<input type="text" name="search" bind:value {placeholder} />
+</form>
 
 <style>
 	input {
-		margin: 1rem;
+		width: calc(100% - 2rem);
+		margin-block: 2rem;
 		padding-block: 0.5rem;
 		padding-inline: 1rem;
 		outline: var(--primary-color);
