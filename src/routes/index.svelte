@@ -3,9 +3,15 @@
 	import MetaTitle from '$lib/MetaTitle.svelte';
 	import SearchPost from '$lib/SearchPost.svelte';
 	import { fade } from 'svelte/transition';
+	import { paginate, LightPaginationNav } from 'svelte-paginate';
 
 	export let posts;
 	let searchText = '';
+
+	let items = posts;
+	let currentPage = 1;
+	let pageSize = 4;
+	$: paginatedPosts = paginate({ items, pageSize, currentPage });
 </script>
 
 <MetaTitle title="Home" />
@@ -13,7 +19,7 @@
 <SearchPost bind:value={searchText} />
 {#if posts.length > 0}
 	<main transition:fade>
-		{#each posts as post}
+		{#each paginatedPosts as post}
 			<article>
 				<a style="text-decoration: none;" sveltekit:prefetch href={`/post/${post.slug}`}>
 					<h2>{@html post.title.rendered}</h2>
@@ -38,6 +44,15 @@
 {:else if posts.length === 0}
 	<p class="search-loading">No snippet found..</p>
 {/if}
+
+<LightPaginationNav
+	totalItems={items.length}
+	{pageSize}
+	{currentPage}
+	limit={1}
+	showStepOptions={true}
+	on:setPage={(e) => (currentPage = e.detail.page)}
+/>
 
 <style>
 	article {
