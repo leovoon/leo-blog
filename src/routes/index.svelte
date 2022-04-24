@@ -4,13 +4,21 @@
 	import SearchPost from '$lib/SearchPost.svelte';
 	import { fade } from 'svelte/transition';
 	import { paginate, LightPaginationNav } from 'svelte-paginate';
+	import { postStore } from '@/stores';
+	import { onMount } from 'svelte';
 
 	export let posts;
 	let searchText = '';
 
-	let items = posts;
+	onMount(() => {
+		$postStore.posts = posts;
+	});
+
+	// pagination
+	let items;
 	let currentPage = 1;
 	let pageSize = 4;
+	$: items = $postStore.posts;
 	$: paginatedPosts = paginate({ items, pageSize, currentPage });
 </script>
 
@@ -41,18 +49,17 @@
 			</article>
 		{/each}
 	</main>
+	<LightPaginationNav
+		totalItems={items.length}
+		{pageSize}
+		{currentPage}
+		limit={1}
+		showStepOptions={true}
+		on:setPage={(e) => (currentPage = e.detail.page)}
+	/>
 {:else if posts.length === 0}
 	<p class="search-loading">No snippet found..</p>
 {/if}
-
-<LightPaginationNav
-	totalItems={items.length}
-	{pageSize}
-	{currentPage}
-	limit={1}
-	showStepOptions={true}
-	on:setPage={(e) => (currentPage = e.detail.page)}
-/>
 
 <style>
 	article {
