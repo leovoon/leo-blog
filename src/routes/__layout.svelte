@@ -31,7 +31,7 @@
 
 <style>
 	.wrapper {
-		width: 50vw;
+		width: 65vw;
 		margin: 0 auto;
 	}
 	:global(.more-link) {
