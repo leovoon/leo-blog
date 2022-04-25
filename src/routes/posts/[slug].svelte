@@ -1,4 +1,5 @@
 <script>
+	import CategoryBadge from '$lib/CategoryBadge.svelte';
 	import MetaTitle from '$lib/MetaTitle.svelte';
 
 	export let post;
@@ -9,6 +10,11 @@
 	<p>Loading...</p>
 {:else}
 	<h2>{@html post.title.rendered}</h2>
+	<div class="categories">
+		{#each post.categories as category}
+			<CategoryBadge {category} />
+		{/each}
+	</div>
 	<p><small>{new Date(post.date).toLocaleString('en-US', { hour12: true })}</small></p>
 	<p>by <b>{post.author}</b></p>
 	{#if post.image}

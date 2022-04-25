@@ -9,10 +9,26 @@
 
 	export let posts;
 	let searchText = '';
+	let promise;
 
 	onMount(() => {
 		$postStore.posts = posts;
 	});
+
+	function handleSearchPost(event) {
+		const key = event.detail.key;
+		if (searchText === '') return;
+		if (key === 'Enter') {
+			promise = getSearchPost(searchText);
+		}
+	}
+
+	async function getSearchPost(text) {
+		const res = await fetch('/posts/search/' + text);
+		const { posts: result } = await res.json();
+		$postStore.posts = result;
+		return result;
+	}
 
 	// pagination
 	let items;
@@ -24,12 +40,22 @@
 
 <MetaTitle title="Home" />
 <h2><a href="/"> Leo's Code Snippets </a></h2>
-<SearchPost bind:value={searchText} />
-{#if posts.length > 0}
+<SearchPost bind:value={searchText} on:search={handleSearchPost} />
+{#await promise}
+	<p>Searching for {searchText} ...</p>
+{:then result}
+	{#if result}
+		<p class="info-text">
+			Found <b>{result.length}</b>
+			{result.length > 0 ? 'snippets' : 'snippet'}
+		</p>
+	{/if}
+{/await}
+{#if $postStore.posts.length > 0}
 	<main transition:fade>
 		{#each paginatedPosts as post}
 			<article>
-				<a style="text-decoration: none;" sveltekit:prefetch href={`/post/${post.slug}`}>
+				<a style="text-decoration: none;" sveltekit:prefetch href={`/posts/${post.slug}`}>
 					<h2>{@html post.title.rendered}</h2>
 					<div class="categories">
 						{#each post.categories as category}
@@ -42,7 +68,7 @@
 						</div>
 						<div class="excerpt-wrapper">
 							{@html post.excerpt.rendered}
-							<a href={`/post/${post.slug}`}>Read More</a>
+							<a href={`/posts/${post.slug}`}>Read More</a>
 						</div>
 					</div>
 				</a>
@@ -57,8 +83,8 @@
 		showStepOptions={true}
 		on:setPage={(e) => (currentPage = e.detail.page)}
 	/>
-{:else if posts.length === 0}
-	<p class="search-loading">No snippet found..</p>
+{:else if $postStore.posts.length === 0}
+	<p class="info-text">No snippet found..</p>
 {/if}
 
 <style>
@@ -75,7 +101,7 @@
 		box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.3);
 	}
 
-	.search-loading {
+	.info-text {
 		color: rgba(0, 0, 0, 0.6);
 	}
 

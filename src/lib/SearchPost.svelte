@@ -1,11 +1,15 @@
 <script>
+	import { createEventDispatcher } from 'svelte';
+
 	let placeholder = 'Search snippet...';
 	export let value = '';
+	const dispatch = createEventDispatcher();
+	function searchPost(evt) {
+		dispatch('search', evt);
+	}
 </script>
 
-<form action="/" method="get">
-	<input type="text" name="search" bind:value {placeholder} />
-</form>
+<input type="text" name="search" on:keyup={searchPost} bind:value {placeholder} />
 
 <style>
 	input {
