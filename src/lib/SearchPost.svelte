@@ -21,4 +21,9 @@
 		border: transparent;
 		border-radius: 3px;
 	}
+
+	::placeholder {
+		color: rgba(0, 0, 0, 0.4);
+		opacity: 1; /* Firefox */
+	}
 </style>
