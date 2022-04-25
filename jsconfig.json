@@ -1,6 +1,11 @@
 {
 	"compilerOptions": {
-		"jsx": "react"
+		"jsx": "react",
+		"paths": {
+			"@": ["src"],
+			"$lib": ["src/lib"],
+			"$lib/*": ["src/lib/*"]
+		}
 	},
 	"extends": "./.svelte-kit/tsconfig.json"
 }
