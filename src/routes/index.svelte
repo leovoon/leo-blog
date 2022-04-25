@@ -132,6 +132,9 @@
 	}
 
 	@media (max-width: 600px) {
+		article h2 {
+			font-size: 1.2rem;
+		}
 		.post {
 			flex-direction: column;
 		}
@@ -141,6 +144,7 @@
 		}
 
 		.post .excerpt-wrapper {
+			font-size: 0.8rem;
 			width: 100%;
 			margin-top: 0;
 		}
