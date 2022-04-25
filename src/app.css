@@ -26,6 +26,8 @@ body {
 		var(--secondary-color) 10.45%,
 		var(--tertiary-color) 41.35%
 	);
+	width: 65vw;
+	margin: 0 auto;
 }
 
 body::before {
@@ -42,6 +44,19 @@ body::before {
 		rgba(255, 255, 255, 0) 100%
 	);
 	opacity: 0.05;
+}
+
+@media (max-width: 768px) {
+	body {
+		width: 90vw;
+	}
+}
+
+.more-link) {
+	display: none;
+}
+img {
+	max-width: 100%;
 }
 
 #svelte {
@@ -131,4 +146,10 @@ footer {
 #nprogress .spinner-icon {
 	border-top-color: rgb(232, 146, 135);
 	border-left-color: rgb(232, 146, 135);
+}
+
+.categories {
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 1rem;
 }

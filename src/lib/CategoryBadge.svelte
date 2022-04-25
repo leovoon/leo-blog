@@ -6,6 +6,7 @@
 
 <style>
 	badge {
+		font-size: 0.8rem;
 		border-radius: 13px;
 		padding: 0.3rem 1rem;
 		background-color: rgb(232, 146, 135);

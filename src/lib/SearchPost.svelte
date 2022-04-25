@@ -15,7 +15,7 @@
 	input {
 		width: calc(100% - 2rem);
 		margin-block: 2rem;
-		padding-block: 0.5rem;
+		padding-block: 1.2rem;
 		padding-inline: 1rem;
 		outline: var(--primary-color);
 		border: transparent;

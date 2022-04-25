@@ -2,12 +2,12 @@
 	import CategoryBadge from '$lib/CategoryBadge.svelte';
 	import MetaTitle from '$lib/MetaTitle.svelte';
 	import SearchPost from '$lib/SearchPost.svelte';
-	import { fade } from 'svelte/transition';
 	import { paginate, LightPaginationNav } from 'svelte-paginate';
 	import { postStore } from '@/stores';
 	import { onMount } from 'svelte';
 
 	export let posts;
+	let title = '📝 code...';
 	let searchText = '';
 	let promise;
 
@@ -38,8 +38,7 @@
 	$: paginatedPosts = paginate({ items, pageSize, currentPage });
 </script>
 
-<MetaTitle title="Leo's Code Snippets" />
-<h2><a href="/"> Leo's Code Snippets </a></h2>
+<MetaTitle {title} />
 <SearchPost bind:value={searchText} on:search={handleSearchPost} />
 {#await promise}
 	<p>Searching for {searchText} ...</p>
@@ -52,7 +51,7 @@
 	{/if}
 {/await}
 {#if $postStore.posts.length > 0}
-	<main transition:fade>
+	<main>
 		{#each paginatedPosts as post}
 			<article>
 				<a style="text-decoration: none;" sveltekit:prefetch href={`/posts/${post.slug}`}>
@@ -105,12 +104,6 @@
 		color: rgba(0, 0, 0, 0.6);
 	}
 
-	.categories {
-		display: flex;
-		gap: 1rem;
-		margin-bottom: 1rem;
-	}
-
 	.post {
 		display: flex;
 		align-items: flex-start;
@@ -133,7 +126,7 @@
 
 	@media (max-width: 600px) {
 		article h2 {
-			font-size: 1.2rem;
+			font-size: 1.4rem;
 		}
 		.post {
 			flex-direction: column;
@@ -144,7 +137,7 @@
 		}
 
 		.post .excerpt-wrapper {
-			font-size: 0.8rem;
+			font-size: 1rem;
 			width: 100%;
 			margin-top: 0;
 		}
