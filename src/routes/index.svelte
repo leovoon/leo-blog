@@ -38,7 +38,7 @@
 	$: paginatedPosts = paginate({ items, pageSize, currentPage });
 </script>
 
-<MetaTitle title="Home" />
+<MetaTitle title="Leo's Code Snippets" />
 <h2><a href="/"> Leo's Code Snippets </a></h2>
 <SearchPost bind:value={searchText} on:search={handleSearchPost} />
 {#await promise}
