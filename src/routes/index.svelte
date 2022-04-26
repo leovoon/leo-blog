@@ -5,6 +5,7 @@
 	import { paginate, LightPaginationNav } from 'svelte-paginate';
 	import { postStore } from '@/stores';
 	import { onMount } from 'svelte';
+	import { LazyImage } from 'svelte-lazy-image';
 
 	export let posts;
 	let title = '📝 code...';
@@ -33,7 +34,7 @@
 	// pagination
 	let items;
 	let currentPage = 1;
-	let pageSize = 4;
+	let pageSize = 6;
 	$: items = $postStore.posts;
 	$: paginatedPosts = paginate({ items, pageSize, currentPage });
 </script>
@@ -62,9 +63,7 @@
 						{/each}
 					</div>
 					<div class="post">
-						<div class="img-wrapper">
-							<img src={post.image} alt={post.title.rendered} />
-						</div>
+						<LazyImage src={post.image} alt={post.title.rendered} options={{ threshold: 0.5 }} />
 						<div class="excerpt-wrapper">
 							{@html post.excerpt.rendered}
 							<a href={`/posts/${post.slug}`}>Read More</a>
@@ -115,8 +114,12 @@
 		align-items: flex-start;
 	}
 
-	.post .img-wrapper {
-		width: 100%;
+	:global(.svelte-lazy-image) {
+		opacity: 0;
+		transition: opacity 400ms ease-in-out;
+	}
+	:global(.svelte-lazy-image--loaded) {
+		opacity: 1;
 	}
 
 	.post .excerpt-wrapper {
@@ -126,7 +129,6 @@
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: flex-end;
-		margin-top: -1em;
 	}
 
 	@media (max-width: 768px) {
