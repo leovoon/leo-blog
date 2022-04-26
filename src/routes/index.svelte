@@ -17,7 +17,7 @@
 
 	function handleSearchPost(event) {
 		const key = event.detail.key;
-		if (searchText === '') return;
+		if (searchText.trim() === '') return;
 		if (key === 'Enter') {
 			promise = getSearchPost(searchText);
 		}
@@ -46,7 +46,7 @@
 	{#if result}
 		<p class="info-text">
 			Found <b>{result.length}</b>
-			{result.length > 0 ? 'snippets' : 'snippet'}
+			{result.length > 1 ? 'snippets' : 'snippet'}
 		</p>
 	{/if}
 {/await}
@@ -87,8 +87,13 @@
 {/if}
 
 <style>
+	main {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1rem;
+		margin-bottom: 2rem;
+	}
 	article {
-		margin-bottom: 4rem;
 		padding: 1rem;
 		border-radius: 13px;
 		cursor: pointer;
@@ -106,16 +111,16 @@
 
 	.post {
 		display: flex;
+		flex-direction: column;
 		align-items: flex-start;
 	}
 
 	.post .img-wrapper {
-		width: 50%;
-		margin-right: 1rem;
+		width: 100%;
 	}
 
 	.post .excerpt-wrapper {
-		width: 50%;
+		width: 100%;
 		margin: 0;
 		display: flex;
 		flex-direction: column;
@@ -124,22 +129,12 @@
 		margin-top: -1em;
 	}
 
-	@media (max-width: 600px) {
+	@media (max-width: 768px) {
+		main {
+			gap: 2rem;
+		}
 		article h2 {
 			font-size: 1.4rem;
-		}
-		.post {
-			flex-direction: column;
-		}
-
-		.post .img-wrapper {
-			width: 100%;
-		}
-
-		.post .excerpt-wrapper {
-			font-size: 1rem;
-			width: 100%;
-			margin-top: 0;
 		}
 	}
 </style>
