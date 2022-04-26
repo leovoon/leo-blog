@@ -9,7 +9,7 @@
 	}
 </script>
 
-<input type="text" name="search" on:keyup={searchPost} bind:value {placeholder} />
+<input type="text" autocomplete="on" name="search" on:keyup={searchPost} bind:value {placeholder} />
 
 <style>
 	input {
