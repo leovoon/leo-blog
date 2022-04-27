@@ -63,7 +63,12 @@
 						{/each}
 					</div>
 					<div class="post">
-						<LazyImage src={post.image} alt={post.title.rendered} options={{ threshold: 0.5 }} />
+						<LazyImage
+							width={300}
+							src={post.image}
+							alt={post.title.rendered}
+							options={{ threshold: 0.5 }}
+						/>
 						<div class="excerpt-wrapper">
 							{@html post.excerpt.rendered}
 							<a href={`/posts/${post.slug}`}>Read More</a>
@@ -81,7 +86,8 @@
 		showStepOptions={true}
 		on:setPage={(e) => (currentPage = e.detail.page)}
 	/>
-{:else if $postStore.posts.length === 0}
+{/if}
+{#if $postStore.posts.length === 0}
 	<p class="info-text">No snippet found..</p>
 {/if}
 
@@ -106,6 +112,7 @@
 
 	.info-text {
 		color: rgba(0, 0, 0, 0.6);
+		text-align: center;
 	}
 
 	.post {
@@ -115,6 +122,8 @@
 	}
 
 	:global(.svelte-lazy-image) {
+		min-width: 100%;
+		aspect-ratio: 16/9;
 		opacity: 0;
 		transition: opacity 400ms ease-in-out;
 	}
