@@ -9,8 +9,12 @@
 		minimum: 0.16
 	});
 	$: {
-		$navigating && NProgress.start();
-		!$navigating && NProgress.done();
+		if ($navigating) {
+			NProgress.start();
+		}
+		if (!$navigating) {
+			NProgress.done();
+		}
 	}
 </script>
 
