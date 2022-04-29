@@ -1,12 +1,10 @@
 <script>
-	import CategoryBadge from '$lib/CategoryBadge.svelte';
 	import MetaTitle from '$lib/MetaTitle.svelte';
 	import SearchPost from '$lib/SearchPost.svelte';
 	import { paginate, LightPaginationNav } from 'svelte-paginate';
 	import { postStore } from '@/stores';
 	import { onMount } from 'svelte';
-	import { LazyImage } from 'svelte-lazy-image';
-
+	import PostList from '$lib/PostList.svelte';
 	export let posts;
 	let title = '📝 code...';
 	let searchText = '';
@@ -52,32 +50,7 @@
 	{/if}
 {/await}
 {#if $postStore.posts.length > 0}
-	<main>
-		{#each paginatedPosts as post}
-			<article>
-				<a style="text-decoration: none;" sveltekit:prefetch href={`/posts/${post.slug}`}>
-					<h2>{@html post.title.rendered}</h2>
-					<div class="categories">
-						{#each post.categories as category}
-							<CategoryBadge {category} />
-						{/each}
-					</div>
-					<div class="post">
-						<LazyImage
-							width={300}
-							src={post.image}
-							alt={post.title.rendered}
-							options={{ threshold: 0.5 }}
-						/>
-						<div class="excerpt-wrapper">
-							{@html post.excerpt.rendered}
-							<a href={`/posts/${post.slug}`}>Read More</a>
-						</div>
-					</div>
-				</a>
-			</article>
-		{/each}
-	</main>
+	<PostList posts={paginatedPosts} />
 	<LightPaginationNav
 		totalItems={items.length}
 		{pageSize}
@@ -92,60 +65,8 @@
 {/if}
 
 <style>
-	main {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		gap: 1rem;
-		margin-bottom: 2rem;
-	}
-	article {
-		padding: 1rem;
-		border-radius: 13px;
-		cursor: pointer;
-		transition: box-shadow 0.2s ease-in-out;
-		box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-	}
-
-	article:hover {
-		box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.3);
-	}
-
 	.info-text {
 		color: rgba(0, 0, 0, 0.6);
 		text-align: center;
-	}
-
-	.post {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-	}
-
-	:global(.svelte-lazy-image) {
-		min-width: 100%;
-		aspect-ratio: 16/9;
-		opacity: 0;
-		transition: opacity 400ms ease-in-out;
-	}
-	:global(.svelte-lazy-image--loaded) {
-		opacity: 1;
-	}
-
-	.post .excerpt-wrapper {
-		width: 100%;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		align-items: flex-end;
-	}
-
-	@media (max-width: 768px) {
-		main {
-			gap: 2rem;
-		}
-		article h2 {
-			font-size: 1.4rem;
-		}
 	}
 </style>
