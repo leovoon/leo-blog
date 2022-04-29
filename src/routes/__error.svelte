@@ -20,4 +20,10 @@
 	{title}
 </h1>
 
-<p style="text-align:center;">This page does not appear on the website map.</p>
+<p style="text-align: center">
+	{#if title === '500'}
+		Something went wrong.
+	{:else if title === '403'}
+		This page does not appear on the website map.
+	{/if}
+</p>

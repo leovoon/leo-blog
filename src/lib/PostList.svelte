@@ -1,13 +1,31 @@
 <script>
 	import PostListItem from './PostListItem.svelte';
+	import { paginate, LightPaginationNav } from 'svelte-paginate';
 	export let posts;
+
+	// pagination
+	let items;
+	let currentPage = 1;
+	let pageSize = 6;
+	$: items = posts;
+	$: paginatedPosts = paginate({ items, pageSize, currentPage });
 </script>
 
 <div class="post-list">
-	{#each posts as post}
+	{#each paginatedPosts as post}
 		<PostListItem {post} />
 	{/each}
 </div>
+{#if posts.length > 0}
+	<LightPaginationNav
+		totalItems={items.length}
+		{pageSize}
+		{currentPage}
+		limit={1}
+		showStepOptions={true}
+		on:setPage={(e) => (currentPage = e.detail.page)}
+	/>
+{/if}
 
 <style>
 	.post-list {
