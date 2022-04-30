@@ -13,7 +13,9 @@
 
 <MetaTitle {title} />
 
-{#if posts.length > 0}
+{#if !posts}
+	<p>Getting snippets ready...</p>
+{:else}
 	<PostList {posts} />
 {/if}
 {#if $postStore.posts.length === 0}
