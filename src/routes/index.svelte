@@ -14,7 +14,7 @@
 <MetaTitle {title} />
 
 {#if !posts}
-	<p>Getting snippets ready...</p>
+	<p class="info-text">Getting snippets ready...</p>
 {:else}
 	<PostList {posts} />
 {/if}
