@@ -14,6 +14,7 @@
 	$: {
 		$navigating === null && NProgress.done();
 		$navigating && NProgress.start();
+		NProgress.isStarted() && !$navigating && NProgress.done();
 	}
 
 	let searchText = '';
