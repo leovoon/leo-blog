@@ -13,7 +13,7 @@
 
 <MetaTitle {title} />
 
-{#if $postStore.posts.length > 0}
+{#if posts.length > 0}
 	<PostList {posts} />
 {/if}
 {#if $postStore.posts.length === 0}
