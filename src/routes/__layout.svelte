@@ -3,7 +3,7 @@
 	import 'nprogress/nprogress.css';
 	import '../app.css';
 	import NProgress from 'nprogress';
-	import { navigating } from '$app/stores';
+	import { navigating, page } from '$app/stores';
 	import SearchPost from '$lib/SearchPost.svelte';
 	import { goto } from '$app/navigation';
 
@@ -12,12 +12,8 @@
 		minimum: 0.16
 	});
 	$: {
-		if ($navigating) {
-			NProgress.start();
-		}
-		if (!$navigating) {
-			NProgress.done();
-		}
+		$navigating === null && NProgress.done();
+		$navigating && NProgress.start();
 	}
 
 	let searchText = '';
@@ -36,6 +32,8 @@
 		await goto('/posts/search/' + text);
 		return;
 	}
+
+	let wpLoginUrl = 'https://wordpress.com/log-in';
 </script>
 
 <MetaTitle title="Leo's code snippets" />
@@ -55,6 +53,6 @@
 	<p>
 		<a href="/">Home</a>
 		|
-		<a href="/login">Login</a>
+		<a href={wpLoginUrl}>Login</a>
 	</p>
 </footer>
