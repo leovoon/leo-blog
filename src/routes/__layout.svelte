@@ -23,11 +23,6 @@
 
 <MetaTitle title="Leo's code snippets" />
 <SearchPost bind:value={searchText} />
-<!-- {#await searchPromise}
-	<p class="info-text">Searching for {searchText} ...</p>
-{:catch}
-	<p>Something went wrong. Please come back later.</p>
-{/await} -->
 
 <main>
 	<slot />

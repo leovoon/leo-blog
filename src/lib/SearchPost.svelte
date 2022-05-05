@@ -1,30 +1,34 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
 	import { goto } from '$app/navigation';
 
 	export let value = '';
 	let placeholder = 'Search snippet...';
 	let form;
+	let searchPromise;
 	const action = '/posts';
-	const dispatch = createEventDispatcher();
 
-	function searchPost(evt) {
-		const formData = new FormData(form);
-		goto(`${action}?search=${formData.get('search')}`, { keepfocus: true, noscroll: true });
-	}
-
-	function handleEnter(event) {
-		const key = event.key;
+	function handleEnter(e) {
+		const key = e.key;
 		if (value.trim() === '') return;
 		if (key === 'Enter') {
-			searchPost();
+			searchPromise = submitSearch();
 		}
+	}
+	async function submitSearch() {
+		const formData = new FormData(form);
+		await goto(`${action}?search=${formData.get('search')}`, { keepfocus: true, noscroll: true });
 	}
 </script>
 
-<form bind:this={form} {action} on:keydown={handleEnter} on:submit|preventDefault={searchPost}>
+<form bind:this={form} {action} on:keydown={handleEnter} on:submit|preventDefault={submitSearch}>
 	<input type="text" autocomplete="on" name="search" bind:value {placeholder} />
 </form>
+
+{#await searchPromise}
+	<p class="info-text">Searching for {value} ...</p>
+{:catch}
+	<p>Something went wrong.</p>
+{/await}
 
 <style>
 	input {

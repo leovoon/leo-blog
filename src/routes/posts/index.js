@@ -13,7 +13,7 @@ export const get = async ({ url }) => {
 			headers: {
 				'cache-control': 'public, max-age=3600'
 			},
-			body: { posts }
+			body: { posts, search: searchQuery }
 		};
 	return { status: 404 };
 };
