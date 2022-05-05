@@ -8,6 +8,9 @@ export const get = async () => {
 	const posts = getPostMeta(data);
 	return {
 		status: 200,
+		headers: {
+			'cache-control': 'public, max-age=3600'
+		},
 		body: { posts }
 	};
 };

@@ -7,6 +7,13 @@ export const get = async ({ url }) => {
 	const res = await fetch(`${apiUrl}?search=${searchQuery}&_embed`);
 	const data = await res.json();
 	const posts = getPostMeta(data);
-	if (posts) return { status: 200, body: { posts } };
+	if (posts)
+		return {
+			status: 200,
+			headers: {
+				'cache-control': 'public, max-age=3600'
+			},
+			body: { posts }
+		};
 	return { status: 404 };
 };
