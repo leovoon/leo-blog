@@ -1,15 +1,30 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
+	import { goto } from '$app/navigation';
 
-	let placeholder = 'Search snippet...';
 	export let value = '';
+	let placeholder = 'Search snippet...';
+	let form;
+	const action = '/posts';
 	const dispatch = createEventDispatcher();
+
 	function searchPost(evt) {
-		dispatch('search', evt);
+		const formData = new FormData(form);
+		goto(`${action}?search=${formData.get('search')}`, { keepfocus: true, noscroll: true });
+	}
+
+	function handleEnter(event) {
+		const key = event.key;
+		if (value.trim() === '') return;
+		if (key === 'Enter') {
+			searchPost();
+		}
 	}
 </script>
 
-<input type="text" autocomplete="on" name="search" on:keyup|preventDefault={searchPost} bind:value {placeholder} />
+<form bind:this={form} {action} on:keydown={handleEnter} on:submit|preventDefault={searchPost}>
+	<input type="text" autocomplete="on" name="search" bind:value {placeholder} />
+</form>
 
 <style>
 	input {
