@@ -8,16 +8,15 @@
 
 	// Top loading bar
 	NProgress.configure({
-		minimum: 0.16
+		minimum: 0.75
 	});
+
 	$: {
 		if ($navigating) {
 			NProgress.start();
+			$navigating.to.origin !== $page.url.origin && NProgress.done();
 		}
-		if (!$navigating) {
-			NProgress.done();
-			break $;
-		}
+		!$navigating && NProgress.done();
 	}
 
 	let searchText = '';
