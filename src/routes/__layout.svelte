@@ -12,10 +12,8 @@
 	});
 
 	$: {
-		if ($navigating) {
-			NProgress.start();
-			$navigating.to.origin !== $page.url.origin && NProgress.done();
-		}
+		$navigating && NProgress.start();
+		$navigating.to.origin !== $page.url.origin && NProgress.done();
 		!$navigating && NProgress.done();
 	}
 
