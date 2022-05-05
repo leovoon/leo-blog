@@ -11,8 +11,13 @@
 		minimum: 0.16
 	});
 	$: {
-		$navigating === null && NProgress.done();
-		$navigating && NProgress.start();
+		if ($navigating) {
+			NProgress.start();
+		}
+		if (!$navigating) {
+			NProgress.done();
+			break $;
+		}
 	}
 
 	let searchText = '';
