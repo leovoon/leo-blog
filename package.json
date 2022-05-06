@@ -13,7 +13,7 @@
 	"resolutions": {
 		"node-fetch": "^3.2.3"
 	},
-	"devDependencies": {
+	"devDependencies": {	
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
 		"eslint": "^7.32.0",
@@ -27,7 +27,6 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource/fira-mono": "^4.5.0",
-		"svelte-lazy-image": "^0.5.1",
-		"svelte-paginate": "^0.0.1"
+		"svelte-lazy-image": "^0.5.1"
 	}
 }
