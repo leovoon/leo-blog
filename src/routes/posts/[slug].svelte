@@ -1,7 +1,17 @@
 <script>
+	import hljs from 'highlight.js/lib/core';
+	import javascript from 'highlight.js/lib/languages/javascript';
+	import css from 'highlight.js/lib/languages/css';
+	import 'highlight.js/styles/atom-one-dark.css';
 	import CategoryBadge from '$lib/CategoryBadge.svelte';
 	import MetaTitle from '$lib/MetaTitle.svelte';
+	import { onMount } from 'svelte';
 
+	onMount(() => {
+		hljs.registerLanguage('javascript', javascript);
+		hljs.registerLanguage('css', css);
+		hljs.initHighlightingOnLoad();
+	});
 	export let post;
 </script>
 
