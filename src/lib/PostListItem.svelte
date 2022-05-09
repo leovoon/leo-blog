@@ -1,7 +1,7 @@
 <script>
 	import CategoryBadge from '$lib/CategoryBadge.svelte';
-	import { LazyImage } from 'svelte-lazy-image';
-	import placeholderImage from '$lib/assets/img-placeholder.webp';
+	// import { LazyImage } from 'svelte-lazy-image';
+	// import placeholderImage from '$lib/assets/img-placeholder.webp';
 	export let post;
 </script>
 
@@ -14,7 +14,7 @@
 			{/each}
 		</div>
 		<div class="post">
-			<LazyImage width={300} src={post.image} placeholder={placeholderImage} alt={post.title.rendered} options={{ threshold: 0.5 }} />
+			<!-- <LazyImage width={300} src={post.image} placeholder={placeholderImage} alt={post.title.rendered} options={{ threshold: 0.5 }} /> -->
 			<div class="excerpt-wrapper">
 				{@html post.excerpt.rendered}
 				<a href={`/posts/${post.slug}`}>Read More</a>
@@ -51,7 +51,7 @@
 		align-items: flex-end;
 	}
 
-	:global(.svelte-lazy-image) {
+	/* :global(.svelte-lazy-image) {
 		min-width: 100%;
 		aspect-ratio: 16/9;
 		opacity: 0;
@@ -59,11 +59,5 @@
 	}
 	:global(.svelte-lazy-image--loaded) {
 		opacity: 1;
-	}
-
-	@media (max-width: 768px) {
-		article h2 {
-			font-size: 1.4rem;
-		}
-	}
+	} */
 </style>

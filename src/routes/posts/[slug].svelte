@@ -27,15 +27,8 @@
 	</div>
 	<p><small>{new Date(post.date).toLocaleString('en-US', { hour12: true })}</small></p>
 	<p>by <b>{post.author}</b></p>
-	{#if post.image}
+	<!-- {#if post.image}
 		<img src={post.image} width={300} alt={post.title.rendered} />
-	{/if}
+	{/if} -->
 	<p>{@html post.content.rendered}</p>
 {/if}
-
-<style>
-	img {
-		min-width: 100%;
-		aspect-ratio: 16/9;
-	}
-</style>
