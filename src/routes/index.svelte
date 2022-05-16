@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import PostList from '$lib/PostList.svelte';
 	import { page } from '$app/stores';
-	import { MetaTagsConfig } from '$lib/MetaTagsConfig.svelte';
+	import MetaTagsConfig from '$lib/MetaTagsConfig.svelte';
 
 	export let posts;
 
