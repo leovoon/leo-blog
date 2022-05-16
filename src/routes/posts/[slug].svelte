@@ -15,7 +15,7 @@
 	export let post;
 </script>
 
-<MetaTitle title={post.title.rendered} />
+<MetaTitle title={post.title.rendered.replace(/\&nbsp;/g, ' ')} />
 {#if !post}
 	<p>Loading...</p>
 {:else}
