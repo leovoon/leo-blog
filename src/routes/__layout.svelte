@@ -4,7 +4,7 @@
 	import NProgress from 'nprogress';
 	import { navigating, page } from '$app/stores';
 	import SearchPost from '$lib/SearchPost.svelte';
-	import { MetaTags } from 'svelte-meta-tags';
+	import MetaTagsConfig from '$lib/MetaTagsConfig.svelte';
 
 	// Top loading bar
 	NProgress.configure({
@@ -19,32 +19,12 @@
 
 	let searchText = '';
 	let wpLoginUrl = 'https://wordpress.com/log-in';
-	let description = 'Helllo web frontend, I wrote about Svelte, CSS and JavaScript.';
 	let title = $page.title;
+	let description = 'Helllo, I wrote about Svelte, CSS and JavaScript.';
 	let url = $page.url;
 </script>
 
-<MetaTags
-	title="lecs"
-	titleTemplate="%s | Leo's FE Code Snippet"
-	{description}
-	canonical="https://leocs.netlify.app"
-	openGraph={{
-		url,
-		title,
-		description,
-		site_name: 'Lecs'
-	}}
-	twitter={{
-		handle: '@handle',
-		site: '@site',
-		cardType: 'summary_large_image',
-		title,
-		description,
-		image: 'https://generative-placeholders.glitch.me/image?width=100&height=100',
-		imageAlt: title
-	}}
-/>
+<MetaTagsConfig {title} {description} {url} />
 <SearchPost bind:value={searchText} />
 
 <main>
