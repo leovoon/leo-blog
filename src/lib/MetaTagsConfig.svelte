@@ -22,7 +22,7 @@
 		cardType: 'summary_large_image',
 		title,
 		description,
-		image: 'https://generative-placeholders.glitch.me/image?width=100&height=100',
+		image: 'https://generative-placeholders.glitch.me/image?width=50&height=50',
 		imageAlt: title
 	}}
 />
