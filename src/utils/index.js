@@ -1,9 +1,30 @@
 export const getPostMeta = (posts) => {
-	posts.map((post) => {
-		// post.image = post._embedded['wp:featuredmedia']?.[0].source_url;
+	// pick out categories, author, title, content, date, slug, excerpt, tags from posts and return
+	return posts.map(post => {
 		post.categories = post._embedded['wp:term'][0]?.map((category) => category.name);
 		post.author = post._embedded['author'][0]?.name;
 		post.title.rendered = post.title.rendered.replace(/&nbsp;/g, ' ');
-	});
-	return posts;
-};
+		const {
+			id,
+			title,
+			content,
+			date,
+			slug,
+			excerpt,
+			author,
+			categories,
+			tags
+		} = post;
+		return {
+			id,
+			title,
+			content,
+			date,
+			slug,
+			excerpt,
+			author,
+			categories,
+			tags
+		};
+	})
+}
