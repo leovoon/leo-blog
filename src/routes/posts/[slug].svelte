@@ -10,7 +10,7 @@
 	onMount(() => {
 		hljs.registerLanguage('javascript', javascript);
 		hljs.registerLanguage('css', css);
-		hljs.initHighlightingOnLoad();
+		hljs.highlightAll();
 	});
 	export let post;
 </script>
