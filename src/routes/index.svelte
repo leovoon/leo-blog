@@ -1,9 +1,18 @@
+<script context="module">
+	/** @type {import("@sveltejs/kit").Load} */
+	export const load = async ({props}) => {
+	  return {
+		props,
+		stuff: { title: "Home" }
+	  }
+	}
+</script>
+
 <script>
 	import { postStore } from '@/stores';
 	import { onMount } from 'svelte';
 	import PostList from '$lib/PostList.svelte';
 	import { page } from '$app/stores';
-	import MetaTagsConfig from '$lib/MetaTagsConfig.svelte';
 
 	export let posts;
 
@@ -16,7 +25,7 @@
 	let url = $page.url;
 </script>
 
-<MetaTagsConfig {title} {description} {url} />
+
 
 {#if !posts}
 	<p class="info-text">Getting snippets ready...</p>

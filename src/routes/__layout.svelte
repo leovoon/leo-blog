@@ -19,7 +19,7 @@
 
 	let searchText = '';
 	let wpLoginUrl = 'https://wordpress.com/log-in';
-	$: title = $page.title;
+	$: title = $page.stuff.title;
 	let description = 'Helllo, I wrote about Svelte, CSS and JavaScript.';
 	let url = $page.url;
 </script>

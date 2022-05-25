@@ -1,10 +1,22 @@
+<script context="module">
+	/** @type {import('@sveltejs/kit').Load} */
+	export function load({props}) {
+		return {
+			props,
+			stuff: {
+				title: props.post.title.rendered
+			}
+
+		};
+	}
+</script>
+
 <script>
 	import hljs from 'highlight.js/lib/core';
 	import javascript from 'highlight.js/lib/languages/javascript';
 	import css from 'highlight.js/lib/languages/css';
 	import 'highlight.js/styles/atom-one-dark.css';
 	import CategoryBadge from '$lib/CategoryBadge.svelte';
-	import MetaTitle from '$lib/MetaTitle.svelte';
 	import { onMount } from 'svelte';
 
 	onMount(() => {
@@ -15,7 +27,6 @@
 	export let post;
 </script>
 
-<MetaTitle title={post.title.rendered.replace(/\&nbsp;/g, ' ')} />
 {#if !post}
 	<p>Loading...</p>
 {:else}

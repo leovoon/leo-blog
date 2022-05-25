@@ -4,18 +4,19 @@
 		return {
 			props: {
 				title: `${status}`
+			},
+			stuff: {
+				title: props.title
 			}
 		};
 	}
 </script>
 
 <script>
-	import MetaTitle from '$lib/MetaTitle.svelte';
 
 	export let title;
 </script>
 
-<MetaTitle title="Opps.." />
 <h1>
 	{title}
 </h1>
