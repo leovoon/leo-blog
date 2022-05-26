@@ -10,6 +10,9 @@ const config = {
 				alias: {
 					'@': path.resolve('./src')
 				}
+			},
+			optimizeDeps: {
+				include: ['highlight.js'],
 			}
 		}
 	}

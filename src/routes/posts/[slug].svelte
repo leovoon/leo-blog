@@ -13,6 +13,7 @@
 
 <script>
 	import hljs from 'highlight.js/lib/core';
+	// import svelteHighlightRules from 'highlightjs-svelte'
 	import javascript from 'highlight.js/lib/languages/javascript';
 	import css from 'highlight.js/lib/languages/css';
 	import 'highlight.js/styles/atom-one-dark.css';
@@ -22,6 +23,7 @@
 	onMount(() => {
 		hljs.registerLanguage('javascript', javascript);
 		hljs.registerLanguage('css', css);
+		// svelteHighlightRules(hljs); rules are not complete yet
 		hljs.highlightAll();
 	});
 	export let post;
