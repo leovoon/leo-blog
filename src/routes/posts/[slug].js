@@ -1,7 +1,7 @@
 import { getPostMeta } from '@/utils';
 
 const url = import.meta.env.VITE_WORDPRESS_API_BASE_PATH + '/posts';
-export const get = async ({ params }) => {
+export const GET = async ({ params }) => {
 	const slug = params.slug;
 	const res = await fetch(`${url}?slug=${slug}&_embed`);
 	const posts = await res.json();
