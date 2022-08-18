@@ -3,7 +3,7 @@
 	import '../app.css';
 	import NProgress from 'nprogress';
 	import { navigating, page } from '$app/stores';
-	import { goto } from '$app/navigation';
+	import { fly } from 'svelte/transition';
 	import SearchPost from '$lib/SearchPost.svelte';
 	import MetaTagsConfig from '$lib/MetaTagsConfig.svelte';
 
@@ -18,20 +18,25 @@
 		!$navigating && NProgress.done();
 	}
 
+	export let data;
 	let searchText = '';
 	let wpLoginUrl = 'https://wordpress.com/log-in';
+	let description = 'Helllo, I wrote about Svelte, CSS and JavaScript.';
+	$: url = data.url;
 	$: isHome = $page.url.pathname === '/';
 	$: title =
 		!isHome && $page.data.post ? $page.data.post.title.rendered : 'Home';
-	let description = 'Helllo, I wrote about Svelte, CSS and JavaScript.';
-	let url = $page.url;
 </script>
 
 <MetaTagsConfig {title} {description} {url} />
 <SearchPost bind:value={searchText} />
 
 <main>
-	<slot />
+	{#key url}
+		<div in:fly|local={{ x: 20, duration: 300 }}>
+			<slot />
+		</div>
+	{/key}
 </main>
 <footer>
 	Built with <a href="https://kit.svelte.dev/">SvelteKit</a> by

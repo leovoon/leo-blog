@@ -12,9 +12,7 @@
 		// svelteHighlightRules(hljs); rules are not complete yet
 		hljs.highlightAll();
 	});
-
-	export let data;
-	$: ({ post } = data);
+	export let post;
 </script>
 
 {#if !post}
