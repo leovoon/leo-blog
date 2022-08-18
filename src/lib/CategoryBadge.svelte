@@ -5,6 +5,8 @@
 		if (category === 'Svelte') color = 'rgb(232, 146, 135)';
 		if (category === 'JavaScript') color = '#E8B882';
 		if (category === 'CSS') color = '#4AA6F0';
+		if (category === 'HTML') color = '#F0D859';
+		if (category === 'Animation') color = '#6800b5';
 	}
 </script>
 

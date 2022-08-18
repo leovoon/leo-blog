@@ -3,6 +3,7 @@
 	import '../app.css';
 	import NProgress from 'nprogress';
 	import { navigating, page } from '$app/stores';
+	import { goto } from '$app/navigation';
 	import SearchPost from '$lib/SearchPost.svelte';
 	import MetaTagsConfig from '$lib/MetaTagsConfig.svelte';
 
@@ -19,7 +20,9 @@
 
 	let searchText = '';
 	let wpLoginUrl = 'https://wordpress.com/log-in';
-	$: title = $page.stuff.title || 'Home';
+	$: isHome = $page.url.pathname === '/';
+	$: title =
+		!isHome && $page.data.post ? $page.data.post.title.rendered : 'Home';
 	let description = 'Helllo, I wrote about Svelte, CSS and JavaScript.';
 	let url = $page.url;
 </script>

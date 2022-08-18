@@ -1,30 +1,20 @@
-<script context="module">
-	/** @type {import('@sveltejs/kit').Load} */
-	export function load({ props }) {
-		return {
-			props,
-			stuff: {
-				title: props.post.title.rendered
-			}
-		};
-	}
-</script>
-
 <script>
 	import hljs from 'highlight.js/lib/core';
 	import javascript from 'highlight.js/lib/languages/javascript';
 	import css from 'highlight.js/lib/languages/css';
 	import 'highlight.js/styles/atom-one-dark.css';
 	import CategoryBadge from '$lib/CategoryBadge.svelte';
-	import { onMount } from 'svelte';
+	import { browser } from '$app/env';
 
-	onMount(() => {
+	if (browser) {
 		hljs.registerLanguage('javascript', javascript);
 		hljs.registerLanguage('css', css);
 		// svelteHighlightRules(hljs); rules are not complete yet
 		hljs.highlightAll();
-	});
-	export let post;
+	}
+
+	export let data;
+	$: ({ post } = data);
 </script>
 
 {#if !post}
@@ -36,7 +26,11 @@
 			<CategoryBadge {category} />
 		{/each}
 	</div>
-	<p><small>{new Date(post.date).toLocaleString('en-US', { hour12: true })}</small></p>
+	<p>
+		<small
+			>{new Date(post.date).toLocaleString('en-US', { hour12: true })}</small
+		>
+	</p>
 	<p>by <b>{post.author}</b></p>
 	<!-- {#if post.image}
 		<img src={post.image} width={300} alt={post.title.rendered} />

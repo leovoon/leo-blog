@@ -1,7 +1,7 @@
 import { getPostMeta } from '@/utils';
-
+import { error } from '@sveltejs/kit'
 const apiUrl = import.meta.env.VITE_WORDPRESS_API_BASE_PATH + '/posts';
-export const GET = async ({ url }) => {
+export const load = async ({ url, setHeaders }) => {
 	const query = url.searchParams;
 	const searchQuery = query.get('search');
 	let queryUrl;
@@ -13,13 +13,14 @@ export const GET = async ({ url }) => {
 	const data = await res.json();
 	posts = getPostMeta(data);
 
-	if (posts)
+	if (posts){
+		setHeaders({
+			'Cache-Control': 'max-age=60'
+		})
 		return {
-			status: 200,
-			headers: {
-				'cache-control': 'public, max-age=60'
-			},
-			body: { posts, search: searchQuery }
+			 posts, 
+			 search: searchQuery 
 		};
-	return { status: 404 };
+	}
+	throw error(404, 'Not found');  
 };

@@ -1,18 +1,18 @@
 import { getPostMeta } from '@/utils';
-
+import { error } from '@sveltejs/kit';
 const url = import.meta.env.VITE_WORDPRESS_API_BASE_PATH + '/posts';
-export const GET = async ({ params }) => {
+export const load = async ({ params, setHeaders }) => {
 	const slug = params.slug;
 	const res = await fetch(`${url}?slug=${slug}&_embed`);
 	const posts = await res.json();
 	const post = getPostMeta(posts)[0];
-	if (post)
+	if (post) {
+		setHeaders({
+			'cache-control': 'public, max-age=3600'
+		});
 		return {
-			status: 200,
-			headers: {
-				'cache-control': 'public, max-age=3600'
-			},
-			body: { post }
+			post
 		};
-	return { status: 404 };
+	}
+	throw error(404, 'Not found');
 };
