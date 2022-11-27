@@ -1,9 +1,10 @@
-<script>
+<script lang="ts">
 	import { postStore } from '@/stores';
 	import { onMount } from 'svelte';
 	import PostList from '$lib/PostList.svelte';
+	import type { PageServerData } from './$types';
 
-	export let data;
+	export let data: PageServerData;
 	$: ({ posts } = data);
 
 	onMount(() => {

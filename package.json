@@ -9,26 +9,24 @@
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
 	},
-	"resolutions": {
-		"node-fetch": "^3.2.3"
-	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
-		"eslint": "^7.32.0",
-		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-svelte3": "^3.4.1",
-		"nprogress": "^0.2.0",
-		"prettier": "^2.7.1",
-		"prettier-plugin-svelte": "^2.7.0",
-		"svelte": "^3.49.0",
-		"svelte-meta-tags": "^2.6.2",
+		"svelte": "^3.44.0",
+		"svelte-check": "^2.7.1",
+		"svelte-preprocess": "^4.10.6",
+		"tslib": "^2.3.1",
 		"typescript": "^4.7.4",
-		"vite": "^3.0.8"
+		"vite": "^3.1.0",
+		"@types/nprogress": "^0.2.0",
+		"nprogress": "^0.2.0",
+		"prettier": "^2.8.0",
+		"prettier-plugin-svelte": "^2.8.1",
+		"svelte-meta-tags": "^2.6.4"
 	},
 	"type": "module",
 	"dependencies": {
-		"@fontsource/fira-mono": "^4.5.9",
-		"highlight.js": "^11.6.0"
+		"@fontsource/fira-mono": "^4.5.10",
+		"highlight.js": "^11.7.0"
 	}
 }

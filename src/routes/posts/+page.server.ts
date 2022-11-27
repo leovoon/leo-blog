@@ -1,7 +1,9 @@
 import { getPostMeta } from '@/utils';
-import { error } from '@sveltejs/kit'
+import { error } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
+
 const apiUrl = import.meta.env.VITE_WORDPRESS_API_BASE_PATH + '/posts';
-export const load = async ({ url, setHeaders }) => {
+export const load: PageServerLoad = async ({ url, setHeaders, fetch }) => {
 	const query = url.searchParams;
 	const searchQuery = query.get('search');
 	let queryUrl;
@@ -13,14 +15,14 @@ export const load = async ({ url, setHeaders }) => {
 	const data = await res.json();
 	posts = getPostMeta(data);
 
-	if (posts){
+	if (posts) {
 		setHeaders({
-			'Cache-Control': 'max-age=60'
-		})
+			'cache-control': 'public, max-age=1800'
+		});
 		return {
-			 posts, 
-			 search: searchQuery 
+			posts,
+			search: searchQuery
 		};
 	}
-	throw error(404, 'Not found');  
+	throw error(404, 'Not found');
 };

@@ -7,5 +7,5 @@
 </h1>
 
 <p style="text-align: center">
-	{$page.error.message}
+	{$page.error?.message}
 </p>

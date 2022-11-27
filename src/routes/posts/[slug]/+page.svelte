@@ -1,9 +1,10 @@
-<script>
+<script lang="ts">
 	import hljs from 'highlight.js/lib/core';
 	import javascript from 'highlight.js/lib/languages/javascript';
 	import css from 'highlight.js/lib/languages/css';
 	import 'highlight.js/styles/atom-one-dark.css';
 	import CategoryBadge from '$lib/CategoryBadge.svelte';
+	import type { PageServerData } from './$types';
 	import { onMount } from 'svelte';
 
 	onMount(() => {
@@ -13,7 +14,7 @@
 		hljs.highlightAll();
 	});
 
-	export let data;
+	export let data: PageServerData;
 	$: ({ post } = data);
 </script>
 
