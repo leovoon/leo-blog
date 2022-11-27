@@ -6,7 +6,7 @@
 </script>
 
 <article>
-	<a style="text-decoration: none;" sveltekit:prefetch href={`/posts/${post.slug}`}>
+	<a style="text-decoration: none;" data-sveltekit-prefetch href={`/posts/${post.slug}`}>
 		<h2>{@html post.title.rendered}</h2>
 		<div class="categories">
 			{#each post.categories as category}

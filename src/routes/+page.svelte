@@ -16,7 +16,7 @@
 {:else}
 	<PostList {posts} />
 	<div style:text-align="center">
-		<a href="/posts" sveltekit:prefetch sveltekit:noscroll
+		<a href="/posts" data-sveltekit-prefetch data-sveltekit-noscroll
 			><button>Show previous posts</button></a
 		>
 	</div>
