@@ -7,6 +7,7 @@
 		if (category === 'CSS') color = '#4AA6F0';
 		if (category === 'HTML') color = '#F0D859';
 		if (category === 'Animation') color = '#6800b5';
+		if (category === 'Backend') color = '#808080';
 	}
 </script>
 
