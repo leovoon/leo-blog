@@ -16,11 +16,19 @@
 	}
 	async function submitSearch() {
 		const formData = new FormData(form);
-		await goto(`${action}?search=${formData.get('search')}`, { keepfocus: true, noscroll: true });
+		await goto(`${action}?search=${formData.get('search')}`, {
+			keepFocus: true,
+			noScroll: true
+		});
 	}
 </script>
 
-<form bind:this={form} {action} on:keydown={handleEnter} on:submit|preventDefault={submitSearch}>
+<form
+	bind:this={form}
+	{action}
+	on:keydown={handleEnter}
+	on:submit|preventDefault={submitSearch}
+>
 	<input type="text" autocomplete="on" name="search" bind:value {placeholder} />
 </form>
 
